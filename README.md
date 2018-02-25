@@ -1,14 +1,14 @@
-### Study
+# Study
 
 
 
 
-# Jump to Python (완료날짜 기준)
+### Jump to Python (완료날짜 기준)
 - 대충 알고있음. 매번 문법을 찾아보는 게 힘들어 다시 한 번 정리 및 복습의 필요성을 느낌
 1. 180218 02-1. 숫자형 자료형
 2. 180220 02-2. 문자형 자료형
 3. 1802
 
 
-# Tensorflow with R
+### Tensorflow with R
 
