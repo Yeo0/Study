@@ -328,15 +328,211 @@ t2*3 # 반복
 
 #리스트와 사용문법은 동일
 
+
 ###02-5. 딕셔너리 자료형
+
 #대응관계를 나타낼 수 있는 자료형 (Key, value)
-#key를 통해 value를 얻음 (자료구조 참고)
+#key를 통해 value를 얻음 (자료구조 참고 _ java map과 동일)
+
+dic={'name':'pey','phone':'0119993323','birth':'1118'} #{key:value, key:value, ...}
+
+#1. 딕셔너리 쌍 추가하기
+a={1:'hi'}
+a={'a':[1,2,3]}
+
+a={1:'a'}
+a[2]='b'#key=2,value=b인 딕셔너리 한 쌍 추가
+a
+
+a['name']='pey'
+a
+
+a[3]=[1,2,3]
+a
+
+#2. 딕셔너리 요소 삭제하기
+del a[1] #del a[key]: key에 해당하는 {key:value}쌍 제거
+a
+
+
+##딕셔너리 활용
+grade={'pey':10, 'julliet':99}
+grade['pey']
+grade['julliet']
+
+a={1:'a',2:'b'}
+a[1] #a[key] -> key 에 해당하는 value 리턴
+a[2]
+
+dic={'name':'pey','phone':'0119993323','birth':'1118'} #{key:value, key:value, ...}
+dic['name'] #없는 key 일 때 오류
+dic['phone']
+dic['birth']
+
+
+##딕셔너리 쓸 때 주의사항
+#1. key는 고유한 값이므로 중복될 경우, 누락됨. -> 중복 안쓰는게 좋음
+a={1:'a',1:'b'}
+a #둘 중 하나는 무시됨
+
+#2.key에 리스트는 쓸 수 없음 (리스트의 변하는 특성 때문)
+a={[1,2]:'hi'}
+
+##딕셔너리 관련 함수들
+dic={'name':'pey','phone':'0119993323','birth':'1118'} #{key:value, key:value, ...}
+dic.keys() #dic의 key만을 튜플로 묶은 값을 dict_keys 객체 리턴
+
+for k in dic.keys():
+    print(k)
+    
+list(dic.keys()) #dict_keys 리스트변환
+
+dic.values() #dic의 value만을 튜플로 묶은 값을 dict_values 객체 리턴
+list(dic.values())
+
+dic.items() #dic의 key와 value의 쌍을 튜플로 묶은 값을 dict_items 객체 리턴
+list(dic.items())
+
+dic.clear() #key:value 쌍 모두 지우기
+dic
+
+dic={'name':'pey','phone':'0119993323','birth':'1118'} #{key:value, key:value, ...}
+dic.get('name') #dic['name']과 동일한 기능 / 없는 key일 때 None return
+dic.get('phone')
+
+dic.get('nokey')
+dic['nokey']
+
+dic.get('foo','bar') #get(x,default값) / foo가 없으므로 디폴트인 bar 리턴
+
+dic={'name':'pey','phone':'0119993323','birth':'1118'} #{key:value, key:value, ...}
+'name' in dic #dic에 해당 key있는지 확인 / True or False로 리턴
+'email' in dic
+
+#순서가 없기 때문에 인덱싱 불가능
+
+
+###02-6. 집합 자료형
+
+s1=set([1,2,3])
+s1
+
+s2=set("Hello") #중복허용 X, 순서X -> 인덱싱 불가
+s2
+
+
+s1=set([1,2,3,4,5,6])
+s2=set([4,5,6,7,8,9])
+
+#1.교집합
+s1&s2 
+s1.intersection(s2)
+
+#2. 합집합
+s1|s2 
+s1.union(s2)
+
+#3. 차집합
+s1-s2
+s2-s1
+s1.difference(s2)
+s2.difference(s1)
+
+#함수들
+s1=set([1,2,3])
+s1.add(4) #값 1개 추가
+s1
+
+s1.update([4,5,6]) #값 여러개 추가하기 
+s1
+
+s1.remove(2) #특정 값 제거
+s1
+
+
+###02-7. 불 자료형 (논리 (T/F))
+a=True
+b=False
+
+1==1
+2>1
+2<1
+
+a=[1,2,3,4]
+while a:
+    print(a.pop())
+#마지막 요소부터 하나씩 꺼내기
+
+#자료형의 참/거짓 식별
+bool('python')
+bool('') #빈 문자열 거짓
+bool([1,2,3])
+bool([]) #빈 리스트 거짓
+bool(0) #0거짓
+bool(3)
+
+
+
+###02-8. 변수
+
+#변수=객체=파이썬에서 사용되는 모든 것
+
+a=1 #a:변수의 이름 = 객체가 저장된 메모리위치 가리키는 레퍼런스
+b="python"
+c=[1,2,3]
+type(3)
+
+import sys
+sys.getrefcount(3)
+a=3
+sys.getrefcount(3)
+b=3
+sys.getrefcount(3)
+#하나씩 늘어남. 
+
+
+#변수를 만드는 여러가지 방법
+a,b = ('python','life') #튜플로 변수 생성 가능
+(a,b)=('python','life') #위와 동일한 방법
+[a,b]=['python','life'] #리스트로 변수 생성 가능
+
+a=b='python'
+
+#변수 바꾸는 함수
+a=3
+b=5
+a,b=b,a #헐ㅋㅋㅋㅋㅋㅋ
+b
+a
+
+#생성 변수 제거
+a=3
+b=3
+del(a)
+del(b)
+
+#리스트를 변수에 넣고 복사하고자 할 때 
+a=[1,2,3]
+b=a
+a[1]=4
+a
+b # 같은 리스트를 가리고 있는 것이기 때문에 같이 바뀜
+a is b #간단히 확인 가능 
+
+a=[1,2,3]
+b=a[:] #리스트 전체를 가리키는 [:]를 이용해 복사
+a[1]=4
+a
+b
+
+from copy import copy
+b=copy(a) # = b=a[:]과 동일함
+
+b is a
 
 
 
 
+####03.프로그램의 구조, 제어문
 
-
-
-
-
+### 03-1. if문
