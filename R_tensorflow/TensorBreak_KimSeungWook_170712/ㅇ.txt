@@ -1,0 +1,25 @@
+https://tensorflow.rstudio.com/tutorial_mnist_beginners.html
+
+www.tensorflow.org
+
+1.bp.blogspot.com
+
+t-robotics.blogspot.kr/2016/05/convolutional..!~
+
+scs.ryerson.ca/~aharley/vis/conv/flat.html
+
+
+
+www.slideshare.net/dahimoon/20160623/..
+
+tensor 는 기능을 알아야 쓸 수 있는 것 같...
+
+
+https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.slideshare.net%2Fdahlmoon%2F20160623-63318427%3Fnext_slideshow%3D1&h=ATPPOPDJArbrmPnwhhu6J5agVPwB9h1ngoq9CkRf89F4ULfNk4q9az1N6vuYrFzBOUODoZC1kqyR0huG2wV7ZzEKfm3f3cFECuMXi0YJewagqMK4FeQHfITKTOjm9yQp0TPje6iwuVMQfg
+
+
+
+tensorboard 심볼
+
+
+
