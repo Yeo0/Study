@@ -1,0 +1,109 @@
+## Support Vector Classifier
+
+set.seed(1)
+x=matrix(rnorm(20*2), ncol=2)
+y=c(rep(-1,10), rep(1,10))
+x[y==1,]=x[y==1,] + 1
+plot(x, col=(3-y))
+dat=data.frame(x=x, y=as.factor(y))
+
+install.packages("e1071")
+library(e1071)
+
+svmfit=svm(y~., data=dat, kernel="linear", cost=10,scale=FALSE)
+plot(svmfit, dat)
+svmfit$index
+summary(svmfit)
+
+#Comparison with smaller cost (=wider margin)
+svmfit=svm(y~., data=dat, kernel="linear", cost=0.1,scale=FALSE) 
+plot(svmfit, dat)
+svmfit$index #Check more support vectors
+
+set.seed(1)
+#Find optimum cost
+tune.out=tune(svm,y~.,data=dat,kernel="linear",ranges=list(cost=c(0.001, 0.01, 0.1, 1,5,10,100)))
+summary(tune.out)
+bestmod=tune.out$best.model
+summary(bestmod)
+
+#Test for bestmod by tune function
+xtest=matrix(rnorm(20*2), ncol=2)
+ytest=sample(c(-1,1), 20, rep=TRUE)
+xtest[ytest==1,]=xtest[ytest==1,] + 1
+testdat=data.frame(x=xtest, y=as.factor(ytest))
+ypred=predict(bestmod,testdat)
+table(predict=ypred, truth=testdat$y)
+
+svmfit=svm(y~., data=dat, kernel="linear", cost=.01,scale=FALSE)
+ypred=predict(svmfit,testdat)
+table(predict=ypred, truth=testdat$y)
+
+
+## Support Vector Machine
+
+set.seed(1)
+x=matrix(rnorm(200*2), ncol=2)
+x[1:100,]=x[1:100,]+2
+x[101:150,]=x[101:150,]-2
+y=c(rep(1,150),rep(2,50))
+dat=data.frame(x=x,y=as.factor(y))
+plot(x, col=y)
+
+train=sample(200,100)
+svmfit=svm(y~., data=dat[train,], kernel="radial",  gamma=1, cost=1)
+plot(svmfit, dat[train,])
+summary(svmfit)
+svmfit=svm(y~., data=dat[train,], kernel="radial",gamma=1,cost=1e5)
+plot(svmfit,dat[train,])
+
+set.seed(1)
+tune.out=tune(svm, y~., data=dat[train,], kernel="radial", ranges=list(cost=c(0.1,1,10,100,1000),gamma=c(0.5,1,2,3,4)))
+summary(tune.out)
+table(true=dat[-train,"y"], pred=predict(tune.out$best.model,newdata=dat[-train,]))
+
+## SVM with Multiple Classes
+
+set.seed(1)
+x=rbind(x, matrix(rnorm(50*2), ncol=2))
+y=c(y, rep(0,50))
+x[y==0,2]=x[y==0,2]+2
+dat=data.frame(x=x, y=as.factor(y))
+plot(x,col=(y+1))
+
+svmfit=svm(y~., data=dat, kernel="radial", cost=10, gamma=1)
+plot(svmfit, dat)
+
+
+##letters data
+
+letters <- read.csv("letterdata.csv")
+str(letters)
+
+
+letters_train <- letters[1:16000, ]
+letters_test  <- letters[16001:20000, ]
+
+
+install.packages("kernlab")
+library(kernlab)
+letter_classifier <- ksvm(letter ~ ., data = letters_train,
+                          kernel = "vanilladot")
+
+letter_classifier
+letter_predictions <- predict(letter_classifier, letters_test)
+head(letter_predictions)
+table(letter_predictions, letters_test$letter)
+
+agreement <- letter_predictions == letters_test$letter
+table(agreement)
+prop.table(table(agreement))
+
+letter_classifier_rbf <- ksvm(letter ~ ., data = letters_train, kernel = "rbfdot")
+letter_predictions_rbf <- predict(letter_classifier_rbf, letters_test)
+
+agreement_rbf <- letter_predictions_rbf == letters_test$letter
+table(agreement_rbf)
+prop.table(table(agreement_rbf))
+
+

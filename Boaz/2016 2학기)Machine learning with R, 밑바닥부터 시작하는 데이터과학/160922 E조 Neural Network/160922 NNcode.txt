@@ -1,0 +1,318 @@
+<<<getting_started_summary>>>
+
+
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+
+# y=2x-2에 균등한 간격으로 놓여있는 샘플 50개를 만듦
+num_examples = 50
+X = np.array([np.linspace(-2, 4, num_examples), np.linspace(-6, 6, num_examples)])
+plt.figure(figsize=(4,4))
+plt.scatter(X[0], X[1])
+plt.show()
+
+
+
+# 각 x,y에 랜덤한 gaussian distribution을 따르는 noise를 추가해 데이터를 흩뜨림
+X += np.random.randn(2, num_examples)
+plt.figure(figsize=(4,4))
+plt.scatter(X[0], X[1])
+plt.show()
+
+
+
+# numpy 안에 있는 polyfit이라는 메소드를 이용하여 선형 회귀 모델을 쉽게 만들 수 있다
+# 여기서 polyfit이 찾아준 가중치 두개를 NN을 학습시켜 찾아내는 것이 목표
+weights = np.polyfit(X[0], X[1], 1)
+plt.figure(figsize=(4,4))
+plt.scatter(X[0], X[1])
+line_x_range = (-3, 5)
+plt.plot(line_x_range, [weights[1] + a * weights[0] for a in line_x_range], "g", alpha=0.8)
+plt.show()
+
+
+
+num_examples = 50
+X = np.array([np.linspace(-2, 4, num_examples), np.linspace(-6, 6, num_examples)])
+X += np.random.randn(2, num_examples)
+
+# array X안에 element 2개를 분리. X[0]=x, X[1]=y
+# x와 상수 1(bias)을 묶어줌
+x, y = X
+x_with_bias = np.array([(1., a) for a in x]).astype(np.float32)
+
+
+# iteration동안 바뀌는 loss를 기록하기 위해 빈 list를 만듦
+losses = []
+
+# 학습 횟수:50회, 학습률:0.002
+training_steps = 50
+mu = 0.002
+
+# 텐서플로우는 session위에서 모든 operation이 실행
+with tf.Session() as sess:
+    
+    # input은 x,1로 이루어진 array, target은 실제 y값으로 둘 다 고정되어 있는 값임
+    # weight는 2x1 matrix로 각각 X, 1에 대응되는 가중치. (즉,WX+b에서 W[0]=W, W[1]=b 겠죠?)
+    input = tf.constant(x_with_bias)
+    target = tf.constant(np.transpose([y]).astype(np.float32))
+    weights = tf.Variable(tf.random_normal([2, 1], 0, 0.1))
+    
+    # 변수 초기화
+    tf.initialize_all_variables().run()
+    
+    # yhat: WX+b꼴의 실제 y에 대한 추정치(혹은 NN에 의한 output)
+    # yerror: 추정치와 목푯값의 차
+    # L2 loss fn 이용 (MSE)
+    # GradientDescentOptimizer를 이용해 가중치를 업데이트
+    yhat = tf.matmul(input, weights)
+    yerror = tf.sub(yhat, target)
+    loss = tf.reduce_mean(tf.nn.l2_loss(yerror))
+    update_weights = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+    
+    
+    '''l2_loss와 GradientDescentOptimizer의 역할은 다음과 같습니다. 
+       l2_loss : loss = 0.5 * tf.reduce_sum(tf.mul(yerror, yerror))
+       GradientDescentOptimizer : gradient = tf.reduce_sum(tf.transpose(tf.mul(input, yerror)), 1, keep_dims=True)
+       update_weights = tf.assign_sub(weights, mu * gradient)'''
+  
+    # for문 안에서 학습 진행
+    # update_weights를 실행하고 학습마다 바뀌는 loss를 아까 만들어준 losses라는 빈 list에 누적시킴
+    for _ in range(training_steps):
+        sess.run(update_weights)
+        losses.append(loss.eval())
+
+    
+    # 학습이 끝난 뒤 최종 W, yhat
+    betas = weights.eval()
+    yhat = yhat.eval()
+
+# Show the results.
+
+fig, (ax1, ax2) = plt.subplots(1, 2)
+plt.subplots_adjust(wspace=.3)
+fig.set_size_inches(10, 4)
+ax1.scatter(x, y, alpha=.7)
+ax1.scatter(x, np.transpose(yhat)[0], c="g", alpha=.6)
+line_x_range = (-4, 6)
+ax1.plot(line_x_range, [betas[0] + a * betas[1] for a in line_x_range], "g", alpha=0.6)
+ax2.plot(range(0, training_steps), losses)
+ax2.set_ylabel("Loss")
+ax2.set_xlabel("Training steps")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+<<<linear_regression>>>
+
+import tensorflow as tf
+import numpy
+import matplotlib.pyplot as plt
+rng = numpy.random
+%matplotlib inline
+
+
+# 학습을 위한 파라미터 셋팅; 학습률, 학습 횟수, 50회 학습마다 학습 결과 제시
+learning_rate = 0.01
+training_epochs = 1000
+display_step = 50
+
+
+# 학습용 데이터
+train_X = numpy.asarray([3.3,4.4,5.5,6.71,6.93,4.168,9.779,6.182,7.59,2.167,
+                         7.042,10.791,5.313,7.997,5.654,9.27,3.1])
+train_Y = numpy.asarray([1.7,2.76,2.09,3.19,1.694,1.573,3.366,2.596,2.53,1.221,
+                         2.827,3.465,1.65,2.904,2.42,2.94,1.3])
+n_samples = train_X.shape[0]
+
+# 그래프
+plt.plot(train_X, train_Y, 'ro', label='Original data')
+plt.legend(loc='upper left')
+
+
+
+# training data를 넣을 수 있는 공간 확보; placeholder (크기 미지정)
+X = tf.placeholder("float")
+Y = tf.placeholder("float")
+
+# 변수 셋팅; weight, bias
+# random하게 initial value 지정
+W = tf.Variable(rng.randn(), name="weight")
+b = tf.Variable(rng.randn(), name="bias")
+
+# X*W+b 형태의 LR model, 즉 activation fn 없이 summation을 출력하는 SLP
+pred = tf.add(tf.mul(X, W), b)
+
+
+
+# L2 cost function(MSE)
+# reduce_sum = input tensor의 dimension을 줄여 summation
+cost = tf.reduce_sum(tf.pow(pred-Y, 2))/(2*n_samples)
+
+# Gradient descent optimazer 이용
+optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+
+
+# 변수 초기화
+init = tf.initialize_all_variables()
+
+
+# 텐서플로우의 모든 operation은 session위에서 돌아갑니다.
+with tf.Session() as sess:
+    # 초기화 op 실행
+    sess.run(init)
+
+    # 미리 만들어 놓은 X, Y라는 placeholder를 key로 이용해 train_X, train_Y 데이터들을 삽입
+    # 1000번 학습
+    for epoch in range(training_epochs):
+        for (x, y) in zip(train_X, train_Y):
+            sess.run(optimizer, feed_dict={X: x, Y: y})
+
+        # cost, W, b가 어떻게 변화하는지 학습 50번마다 표시 
+        if (epoch+1) % display_step == 0:
+            c = sess.run(cost, feed_dict={X: train_X, Y:train_Y})
+            print "Epoch:", '%04d' % (epoch+1), "cost=", "{:.9f}".format(c), \
+                "W=", sess.run(W), "b=", sess.run(b)
+
+    
+    # 학습이 끝난 뒤 최종 cost, W, b
+    print "Optimization Finished!"
+    training_cost = c
+    print "Training cost=", training_cost, "W=", sess.run(W), "b=", sess.run(b), '\n'
+
+    # original data와 학습 결과(WX+b)를 함께 plotting
+    plt.plot(train_X, train_Y, 'ro', label='Original data')
+    plt.plot(train_X, sess.run(W) * train_X + sess.run(b), label='Fitted line')
+    plt.legend(loc=4)
+    plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+<<<NN_with_iris>>>
+
+!curl -O https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
+
+
+from random import shuffle
+
+# read iris data and shuffle them (initially sorted by labels)
+f = open("iris.data", "rb")
+data = f.read().splitlines()[0:150]
+shuffle(data)
+
+# empty list for iteration
+Xtrain = []
+Ytrain = []
+Xtest = []
+Ytest = []
+
+# 100 samples for training
+for tmp in data[0:100]:
+    
+    # split elements and append features to X, labels to Y
+    tmp = tmp.split(',')
+    Xtrain.append(tmp[0:4])
+    label = tmp[4]
+    if label == 'Iris-virginica':
+        Ytrain.append([1,0,0])
+    elif label == 'Iris-setosa':
+        Ytrain.append([0,1,0])
+    elif label == 'Iris-versicolor':
+        Ytrain.append([0,0,1])
+        
+# 50 samples for test, vice versa
+for tmp in data[100:150]:
+    tmp = tmp.split(',')
+    Xtest.append(tmp[0:4])
+    label = tmp[4]
+    if label == 'Iris-virginica':
+        Ytest.append([1,0,0])
+    elif label == 'Iris-setosa':
+        Ytest.append([0,1,0])
+    elif label == 'Iris-versicolor':
+        Ytest.append([0,0,1])
+
+
+import tensorflow as tf
+
+# parameters
+learning_rate = 0.001
+training_epochs = 5000
+display_step = 100
+
+# network parameters
+n_input = 4
+n_hidden = 3
+n_classes = 3
+
+# graph inputs
+x = tf.placeholder("float", [None, n_input])
+y = tf.placeholder("float", [None, n_classes])
+
+# Create Model with relu activation fn
+def perceptron(_X, _weights, _biases):
+    layer = tf.nn.relu(tf.add(tf.matmul(_X, _weights['h']), _biases['b']))
+    return tf.matmul(layer, _weights['out']) + _biases['out']
+
+# We need 2 weights and biases
+weights = {
+    'h': tf.Variable(tf.random_normal([n_input, n_hidden])),
+    'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+}
+biases = {
+    'b': tf.Variable(tf.random_normal([n_hidden])),
+    'out': tf.Variable(tf.random_normal([n_classes]))
+}
+
+# Construct model
+pred = perceptron(x, weights, biases)
+
+# Define loss and optimizer
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+
+# initializing all variables
+init = tf.initialize_all_variables()
+
+with tf.Session() as sess:
+    # init operation
+    sess.run(init)
+    
+    # Training cycle
+    for epoch in range(training_epochs):
+        avg_cost = 0.
+        # Fit training
+        sess.run(optimizer, feed_dict={x: Xtrain, y: Ytrain})
+        # Compute average loss
+        avg_cost += sess.run(cost, feed_dict={x: Xtrain, y: Ytrain})
+        # Display logs per epoch step
+        if epoch % display_step == 0:
+            print "Epoch:", '%04d' % (epoch+1), "cost=", "{:.9f}".format(avg_cost)
+            
+    print "Optimization Finished!"
+    # Test model
+    correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
+    # Calculate accuracy
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+    print "Accuracy:", accuracy.eval({x: Xtest, y: Ytest})
+
+
