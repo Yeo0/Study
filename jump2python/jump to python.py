@@ -537,6 +537,7 @@ b is a
 
 ### 03-1. if문
 
+#여러 조건문 있을 때 제일 처음에 해당되는 거만 return 함
 #and or not
 #"돈이 3000원 이상 있거나 카드가 있다면 택시를 타고 그렇지 않으면 걸어 가라"
 money = 2000
@@ -600,18 +601,52 @@ messeage="success" if score>=60 else "failure"
 #한 라인으로 작성할 수 있어 활용성 좋음
 
 #연습문제1
+money=5000
+card=False
+
+if card or money >=4000:
+    print("you can take taxi")
+else:
+    print("you can't take taxi")
+
+#연습문제2
+a=[1,9,23,46]
+
+if 23 in a:
+    print("congratulation")
+    
+#연습문제3
+def evenornot(a):
+    if a % 2 ==0: 
+        return "even"
+    else: return "not even"
+evenornot(23)
+
+#연습문제4
+a="f,80"
+b="m,45"
+
+def morf(a):
+    new=a.split(',')  
+    if 'm' in new:
+        if int(new[1]) % 2 ==1:
+            print("A")
+        else:
+            print("B")
+    else:
+         if int(new[1]) % 2 ==1:
+            print("C")
+         else:
+            print("D")
+            
+morf("f,27")
+  
+#연습문제5
+#skirt
 
 
 
-
-
-
-
-
-
-
-
-
+### 03-2. while문
 
 
 
