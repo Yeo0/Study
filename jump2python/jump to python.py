@@ -536,3 +536,96 @@ b is a
 ####03.프로그램의 구조, 제어문
 
 ### 03-1. if문
+
+#and or not
+#"돈이 3000원 이상 있거나 카드가 있다면 택시를 타고 그렇지 않으면 걸어 가라"
+money = 2000
+card=1
+
+if money>=3000 or card:
+    print("택시타")
+else:
+    print("걸어가")
+
+#in, not in
+1 in [1,2,3]
+1 not in [1,2,3]
+
+#"만약 주머니에 돈이 있으면 택시를 타고, 없으면 걸어 가라"
+pocket=['paper','cellphone','money']
+if 'money' in pocket:
+    print("go by taxi")
+else:
+    print("go by bus")
+    
+#"주머니에 돈이 있으면 가만히 있고 주머니에 돈이 없으면 카드를 꺼내라"    
+#pass - 아무것도 하고싶지 않게 할떄
+pocket=['paper','cellphone','money']
+if 'money' in pocket:
+    pass
+else:
+    print("take card out")
+
+if 'money' not in pocket:
+    print("take card out") #위에랑 같은 결과
+
+#"주머니에 돈이 있으면 택시를 타고, 주머니에 돈은 없지만 카드가 있으면 택시를 타고, 돈도 없고 카드도 없으면 걸어 가라"
+pocket=['paper','cellphone','money']
+card=1
+if 'money' in pocket:
+    print("taxi")
+else:
+    if card:
+        print("taxi")
+    else:
+        print("walk")
+        
+pocket=['paper','cellphone','money']
+card=1
+if 'money' in pocket:
+    print("taxi")
+elif card: #이전 조건이 거짓일 때 수행 
+    print("taxi")
+else:
+    print("walk")
+    
+#조건부표현식
+if score >=60:
+    message="success"
+else:
+    message="faliure"
+    
+messeage="success" if score>=60 else "failure"
+#조건문 참인경우 if 조건문 else 조건문이 거짓인 경우
+#한 라인으로 작성할 수 있어 활용성 좋음
+
+#연습문제1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
