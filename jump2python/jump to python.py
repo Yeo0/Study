@@ -294,6 +294,9 @@ a=[1,2,3,'a','b','c']
 del a[4] #del a[x];x는 인덱스값
 a
 
+
+
+
 ###02-4. 튜플 자료형
 #리스트와의 차이점 : [] vs () / 리스트는 값의 생성,삭제,수정 가능, 튜플은 불가 (한번 정하면 지우거나 변경 불가)
 
@@ -327,6 +330,7 @@ t1+t2
 t2*3 # 반복
 
 #리스트와 사용문법은 동일
+
 
 
 ###02-5. 딕셔너리 자료형
@@ -648,11 +652,337 @@ morf("f,27")
 
 ### 03-2. while문
 
+treeHit=0
+while treeHit<10:
+    treeHit=treeHit+1
+    #treeHit+=1
+    print("나무를 %d번 찍었습니다." %treeHit)
+    if treeHit==10:
+        print("나무가 넘어갑니다.")
+    
+#ㅕ여러 선택지중 하나를 선택해서 입력받는 예제
+prompt="""
+    1. Add
+    2. Del
+    3. List
+    4. Quit
+    Enter number:"""
+
+number=0
+while number !=4:
+    print(prompt)
+    number=int(input()) #사용자의 숫자입력을 받아들임
+
+#자판기
+coffee=10
+money=300
+while money: #300으로 고정되있음. 0이 아니기에 항상 참을 의미 // while문 내에서 멈춰주거나 조건을 걸고싶을때 항상 참을 사용
+    print("돈을 받았습니다")
+    coffee=coffee-1
+    print("남은 커피양은 %d개 입니다" % coffee)
+    if not coffee: #if coffee==0
+        print("커피가 다 떨어졌습니다. 판매를 중지합니다")
+        break
+    
+#실제 자판기        
+coffee=10
+while True:
+    moeny=int(input("돈을 넣어주세요:"))
+    if money ==300:
+        print("커피를 받으세요")
+        coffee -=1
+    elif money >300:
+        print("거스름돌 %d를 돌려주고 커피를 받으세요" %(money-300))
+        coffee-=1
+    else:
+        print("커피를 뽑을 수 없습니다.")
+        print("남은 커피양은 %d개 입니다" % coffee)
+    if coffee==0:#if not coffee
+        print("커피가 다 떨어졌습니다")
+        break
+    
+#처음으로 돌아가기
+a=0
+while a<10:
+    a+=1
+    if a%2==0: continue #while문의 처음으로 가게하는거니 else굳이 쓸 필요x
+    else:
+        print(a)
+    
+a=0
+while a<10:
+    a+=1
+    if a%2==0: continue
+    print(a)
+       
+a=0
+while a<10:
+    a+=1
+    if not a%2==0:
+        print(a)
+    
+#무한루프
+while True:
+    print("something") #빠져나오려면 ctrl+c
+
+       
+#연습문제
+#2.1~1000자연수 3배수 합
+a=0
+b=0
+while a<1001:
+    if a%3==0:
+        b+=a #b=b+a
+    a+=1
+    
+print(b)
+    
+#3.
+A = [20, 55, 67, 82, 45, 33, 90, 87, 100, 25]
+a=0
+b=0
+while a<len(A):
+    if A[a]>=50:
+        b+=A[a]
+    a+=1
+print(b)
+#답
+result=0
+while A:
+    mark=A.pop()
+    if mark>=50:
+        result+=mark
+print(result)
+
+#5. 왜 오류가나지?
+line=0
+while line<5:
+    print("*"*line)
+    line+=1
+#답
+line=0
+while True:
+    line+=1
+    if line>5: break
+    print("*"*line)
+    
+#6.
+star=7
+space=0
+while star>0:
+    print(""*space+"*"*star)
+    star-=2
+    space+=1
+
+ 
+##03-3.for문
+test_list=['one','two','three']
+for i in test_list:
+    print(i)
+    
+    
+a=[(1,2),(3,4),(5,6)]
+for (first,last) in a:
+    print(first+last) #튜플의 변수값 대입 사용
+
+marks=[90,25,67,45,80]
+
+number=0
+for mark in marks: # 리스트 자체가 들어가도됨
+    number+=1
+    if mark>=60:
+        print("%d번 학생은 합격입니다" % number)
+    else:
+        print("%d번 학생은 불합격입니다" % number)
+        
+#continue: 처음으로 돌아가게 함
+number=0
+for mark in marks:
+    number+=1
+    if mark<60: continue
+    print("%d번 학생 축하합니다. 합격입니다." % number)
+    
+number=0
+for mark in marks:
+    number+=1
+    if mark>60:
+        print("%d번 학생 축하합니다. 합격입니다." % number)
+    #else: continue
+    
+#range
+a=range(10) #앞에는 자동으로 0이 들어감 / 시작과 끝 숫자는 포함되지 않음
+a     
+
+a=range(1,11)
+a    
+
+sum=0
+for i in range(1,11):
+    sum=sum+i  
+    
+print(sum)
+    
+  
+#
+marks=[90,25,67,45,80]
+for number in range(len(marks)): #개수가 들어가도되고 #range(숫자):0~숫자
+    if marks[number]<60: continue
+    print("%d번 학생 축하합니다. 합격입니다." %(number+1))
+    
+#구구단
+for i in range(2,10):
+    for j in range(1,10):
+        print(i*j,end=" ") #출력값을 줄바꿈없이 이어주기위해
+    print("") #문단바꿈
+    
+    
+#리스트안에 for 문 포함
+a=[1,2,3,4]
+result=[]
+for num in a:
+    result.append(num*3)
+
+print(result)
+    
+#짝수에만 3곱해서 담기
+result=[num*3 for num in a if num%2==0]
+print(result) #리스트 내에서도 가능
+
+#구구단 리스트로
+result=[x*y for x in range(2,10)
+            for y in range(1,10)] #리스트내에서 함수 두번 사용
+print(result)  
+
+#언습문제
+#2 
+sum=0
+for i in range(1,1001):
+    if i % 5 ==0:
+        sum+=i
+    
+print(sum)
+    
+#3
+sum=0
+A = [70, 60, 55, 75, 95, 90, 80, 80, 85, 100]
+for score in A: #리스트로 쓸때는 그냥 앞에껄로씀
+    sum+=score
+print(sum/len(A))
+
+
+
+#4답
+blood=['A', 'B', 'A', 'O', 'AB', 'AB', 'O', 'A', 'B', 'O', 'B', 'AB']
+result={} #딕셔너리 생성
+for i in blood:
+    if i in result:
+        result[i]+=1 #키값이 존재하는 경우에 기존값에 더함
+    else:
+        result[i]=1 #없으면 키값 생성
+
+#5
+numbers = [1, 2, 3, 4, 5]
+
+result = []
+for n in numbers:
+    if n % 2 == 1:
+        result.append(n*2)
+result    
+
+list=[n*2 for n in numbers if n%2==1]
+print(list)
+    
+#6 
+sens="Life is too short, you need python"
+aeiou=["a","e","i","o","u"]
+
+''.join([a for a in sens if a not in aeiou])
 
 
 
 
+####04-1 함수
+#파라메타: 함수에 입력으로 전달된 값(함수를 만들때)
+#아규먼트: 함수를 호출할 때 전달되는 입력값
 
+def sum(a,b): #a,b는 파라메타(매개변수)
+    return a+b 
+
+print(sum(3,4)) #3,4는 인수(아규먼트)
+
+def say(): 
+    return 'Hi'
+
+
+say()
+
+
+#여러개의 입력값을 받을 때 :*
+def sumMany(*int):
+    sum=0
+    for i in int: #ㄹ리스트형식으로 많이사용
+        sum+=i
+    return sum
+
+sumMany(1,2,3,4)
+
+#
+def sumMul(cat,*num):
+    if cat=="sum":
+        result=0
+        for i in num:
+            result+=i
+    elif cat=="mul":
+        result=1
+        for i in num:
+            result=result*i
+    return result
+
+sumMul("sum",1,5,8)
+sumMul("mul",1,5,8)
+
+##키워드파라미터 kwargs
+##딕셔너리 생성함수 :** 두개
+def func(**kwargs):
+    print(kwargs) #함수형태
+                  # key=value형태의 입력인수가 저장되는 딕셔너리 변수
+                  
+
+func(a=1) # a=1의 딕셔너리 생성
+func(name='foo',age='3')
+
+#입력인수 형태 다양하면?
+def func(*arg, **dic):
+    print(arg)
+    print(dic)
+
+func(1,2,3,name='foo',age='3')
+#앞에 여러개는 인수로, 뒤에는 딕셔너리로 저장됨
+
+#return: 함수를 빠져나가는 방법
+
+def say_nick(nick):
+    if nick=="바보":
+        return
+    print("나의 별명은 %s입니다." % nick)
+
+say_nick("멍총이")
+say_nick("바보") #ㅎ함수 종료
+
+## 매개변수에 초깃값 미리 설정하기(초기화 하고싶은 매개변수는 맨뒤에 위치해야한다!!!)
+def say_myself(name,old,man=True):
+    print("나의 이름은 %s 입니다." % name)
+    print("나이는 %d살 입니다." % old)
+    if man:
+        print("남자입니다")
+    else:
+        print("여자입니다")
+
+say_myself("박응용",29) #변수 2개인 것처럼 사용가능
+say_myself("박응용",27,True)
+say_myself("박응용",27,False)
+
+#함수 안에ㅓ서 선언된 변수의 효력범위
 
 
 
