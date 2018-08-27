@@ -982,13 +982,29 @@ say_myself("박응용",29) #변수 2개인 것처럼 사용가능
 say_myself("박응용",27,True)
 say_myself("박응용",27,False)
 
-#함수 안에ㅓ서 선언된 변수의 효력범위
+#함수 안에서 선언된 변수의 효력범위
+#함수 안에서 선언된 매개변수는 함수 안에서만 사용된다.
+#return이용
+
+a=1
+def vartest(a):
+    a=a+1
+    return a
+
+a=vartest(a)
+print(a)
 
 
+#global이용
+a=1
+def vartest():
+    global a #함수는 독립적이용이 좋기때문에 되도록 안쓰는게 좋음
+    a=a+1
+    
+vartest()
+print(a)
 
-
-
-
+#lambda
 
 
 
