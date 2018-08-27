@@ -1,11 +1,20 @@
 # Study
 ***
 
+### 2018 NIMS
+- Python
+- Optimization ( Linear Programming / Constraints Optimization)
+
+### ADSP
+
+
+### Boaz
 
 
 ### Jump to Python 
-- 대충 알고있음. 매번 문법을 찾아보는 게 힘들어 다시 한 번 정리 및 복습의 필요성을 느낌
+- 야매로 공부한 것 복습용.
 
 
-### Tensorflow with R
+### R_Tesnorflow
+- Kaggle
 
