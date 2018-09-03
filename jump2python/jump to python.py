@@ -34,7 +34,7 @@ a//b #나누고 소숫점 버리기 , 즉 가우스 기호
 
 food = "Python's favorite food is perl" #이 경우 '' 쓸 경우 error
 say = '"Python is very easy." he says.' # 이 경우 "" 사용시 error
-food = "Python|\'s favorite food is perl" #문자앞에 쓸 경우 문자 그자체로 인식. 사용 가능 
+food = "Python|\'s favorite food is perl" #문자앞에 쓸 경우 문자 그자체로 인식. 사용 가능
 multiline = '''
 Life is too short
 You need python
@@ -73,13 +73,13 @@ year
 day
 weather
 
-#문자열 바꾸기 
+#문자열 바꾸기
 a="Pithon"
 a[1]
 a[1]='y' #error. 문자열의 요소값은 바꿀 수 있는 값이 아니기 때문
          #문자열, 튜플 등의 자료형은 요소값을 변경할 수 없음
-        
-a[:1]        
+
+a[:1]
 a[2:]
 a[:1]+'y'+a[2:] #이런식으로 가능.. 조금 귀찮..
 
@@ -210,7 +210,7 @@ a=[1,2,3]
 a*3 # * ■ 횟수만큼 반복
 
 a[2]+"hi" #error. 정수와 문자열은 더할 수 없음
-str(a[2]) + "hi" #str() : 정수나 실수를 문자열로 
+str(a[2]) + "hi" #str() : 정수나 실수를 문자열로
 
 #리스트의 수정, 변경과 삭제
 a=[1,2,3]
@@ -388,7 +388,7 @@ dic.keys() #dic의 key만을 튜플로 묶은 값을 dict_keys 객체 리턴
 
 for k in dic.keys():
     print(k)
-    
+
 list(dic.keys()) #dict_keys 리스트변환
 
 dic.values() #dic의 value만을 튜플로 묶은 값을 dict_values 객체 리턴
@@ -429,11 +429,11 @@ s1=set([1,2,3,4,5,6])
 s2=set([4,5,6,7,8,9])
 
 #1.교집합
-s1&s2 
+s1&s2
 s1.intersection(s2)
 
 #2. 합집합
-s1|s2 
+s1|s2
 s1.union(s2)
 
 #3. 차집합
@@ -447,7 +447,7 @@ s1=set([1,2,3])
 s1.add(4) #값 1개 추가
 s1
 
-s1.update([4,5,6]) #값 여러개 추가하기 
+s1.update([4,5,6]) #값 여러개 추가하기
 s1
 
 s1.remove(2) #특정 값 제거
@@ -492,7 +492,7 @@ a=3
 sys.getrefcount(3)
 b=3
 sys.getrefcount(3)
-#하나씩 늘어남. 
+#하나씩 늘어남.
 
 
 #변수를 만드는 여러가지 방법
@@ -515,13 +515,13 @@ b=3
 del(a)
 del(b)
 
-#리스트를 변수에 넣고 복사하고자 할 때 
+#리스트를 변수에 넣고 복사하고자 할 때
 a=[1,2,3]
 b=a
 a[1]=4
 a
 b # 같은 리스트를 가리고 있는 것이기 때문에 같이 바뀜
-a is b #간단히 확인 가능 
+a is b #간단히 확인 가능
 
 a=[1,2,3]
 b=a[:] #리스트 전체를 가리키는 [:]를 이용해 복사
@@ -562,8 +562,8 @@ if 'money' in pocket:
     print("go by taxi")
 else:
     print("go by bus")
-    
-#"주머니에 돈이 있으면 가만히 있고 주머니에 돈이 없으면 카드를 꺼내라"    
+
+#"주머니에 돈이 있으면 가만히 있고 주머니에 돈이 없으면 카드를 꺼내라"
 #pass - 아무것도 하고싶지 않게 할떄
 pocket=['paper','cellphone','money']
 if 'money' in pocket:
@@ -584,22 +584,22 @@ else:
         print("taxi")
     else:
         print("walk")
-        
+
 pocket=['paper','cellphone','money']
 card=1
 if 'money' in pocket:
     print("taxi")
-elif card: #이전 조건이 거짓일 때 수행 
+elif card: #이전 조건이 거짓일 때 수행
     print("taxi")
 else:
     print("walk")
-    
+
 #조건부표현식
 if score >=60:
     message="success"
 else:
     message="faliure"
-    
+
 messeage="success" if score>=60 else "failure"
 #조건문 참인경우 if 조건문 else 조건문이 거짓인 경우
 #한 라인으로 작성할 수 있어 활용성 좋음
@@ -618,10 +618,10 @@ a=[1,9,23,46]
 
 if 23 in a:
     print("congratulation")
-    
+
 #연습문제3
 def evenornot(a):
-    if a % 2 ==0: 
+    if a % 2 ==0:
         return "even"
     else: return "not even"
 evenornot(23)
@@ -631,7 +631,7 @@ a="f,80"
 b="m,45"
 
 def morf(a):
-    new=a.split(',')  
+    new=a.split(',')
     if 'm' in new:
         if int(new[1]) % 2 ==1:
             print("A")
@@ -642,9 +642,9 @@ def morf(a):
             print("C")
          else:
             print("D")
-            
+
 morf("f,27")
-  
+
 #연습문제5
 #skirt
 
@@ -659,7 +659,7 @@ while treeHit<10:
     print("나무를 %d번 찍었습니다." %treeHit)
     if treeHit==10:
         print("나무가 넘어갑니다.")
-    
+
 #ㅕ여러 선택지중 하나를 선택해서 입력받는 예제
 prompt="""
     1. Add
@@ -683,8 +683,8 @@ while money: #300으로 고정되있음. 0이 아니기에 항상 참을 의미 
     if not coffee: #if coffee==0
         print("커피가 다 떨어졌습니다. 판매를 중지합니다")
         break
-    
-#실제 자판기        
+
+#실제 자판기
 coffee=10
 while True:
     moeny=int(input("돈을 넣어주세요:"))
@@ -700,7 +700,7 @@ while True:
     if coffee==0:#if not coffee
         print("커피가 다 떨어졌습니다")
         break
-    
+
 #처음으로 돌아가기
 a=0
 while a<10:
@@ -708,24 +708,24 @@ while a<10:
     if a%2==0: continue #while문의 처음으로 가게하는거니 else굳이 쓸 필요x
     else:
         print(a)
-    
+
 a=0
 while a<10:
     a+=1
     if a%2==0: continue
     print(a)
-       
+
 a=0
 while a<10:
     a+=1
     if not a%2==0:
         print(a)
-    
+
 #무한루프
 while True:
     print("something") #빠져나오려면 ctrl+c
 
-       
+
 #연습문제
 #2.1~1000자연수 3배수 합
 a=0
@@ -734,9 +734,9 @@ while a<1001:
     if a%3==0:
         b+=a #b=b+a
     a+=1
-    
+
 print(b)
-    
+
 #3.
 A = [20, 55, 67, 82, 45, 33, 90, 87, 100, 25]
 a=0
@@ -765,7 +765,7 @@ while True:
     line+=1
     if line>5: break
     print("*"*line)
-    
+
 #6.
 star=7
 space=0
@@ -774,13 +774,13 @@ while star>0:
     star-=2
     space+=1
 
- 
+
 ##03-3.for문
 test_list=['one','two','three']
 for i in test_list:
     print(i)
-    
-    
+
+
 a=[(1,2),(3,4),(5,6)]
 for (first,last) in a:
     print(first+last) #튜플의 변수값 대입 사용
@@ -794,48 +794,48 @@ for mark in marks: # 리스트 자체가 들어가도됨
         print("%d번 학생은 합격입니다" % number)
     else:
         print("%d번 학생은 불합격입니다" % number)
-        
+
 #continue: 처음으로 돌아가게 함
 number=0
 for mark in marks:
     number+=1
     if mark<60: continue
     print("%d번 학생 축하합니다. 합격입니다." % number)
-    
+
 number=0
 for mark in marks:
     number+=1
     if mark>60:
         print("%d번 학생 축하합니다. 합격입니다." % number)
     #else: continue
-    
+
 #range
 a=range(10) #앞에는 자동으로 0이 들어감 / 시작과 끝 숫자는 포함되지 않음
-a     
+a
 
 a=range(1,11)
-a    
+a
 
 sum=0
 for i in range(1,11):
-    sum=sum+i  
-    
+    sum=sum+i
+
 print(sum)
-    
-  
+
+
 #
 marks=[90,25,67,45,80]
 for number in range(len(marks)): #개수가 들어가도되고 #range(숫자):0~숫자
     if marks[number]<60: continue
     print("%d번 학생 축하합니다. 합격입니다." %(number+1))
-    
+
 #구구단
 for i in range(2,10):
     for j in range(1,10):
         print(i*j,end=" ") #출력값을 줄바꿈없이 이어주기위해
     print("") #문단바꿈
-    
-    
+
+
 #리스트안에 for 문 포함
 a=[1,2,3,4]
 result=[]
@@ -843,7 +843,7 @@ for num in a:
     result.append(num*3)
 
 print(result)
-    
+
 #짝수에만 3곱해서 담기
 result=[num*3 for num in a if num%2==0]
 print(result) #리스트 내에서도 가능
@@ -851,17 +851,17 @@ print(result) #리스트 내에서도 가능
 #구구단 리스트로
 result=[x*y for x in range(2,10)
             for y in range(1,10)] #리스트내에서 함수 두번 사용
-print(result)  
+print(result)
 
 #언습문제
-#2 
+#2
 sum=0
 for i in range(1,1001):
     if i % 5 ==0:
         sum+=i
-    
+
 print(sum)
-    
+
 #3
 sum=0
 A = [70, 60, 55, 75, 95, 90, 80, 80, 85, 100]
@@ -887,12 +887,12 @@ result = []
 for n in numbers:
     if n % 2 == 1:
         result.append(n*2)
-result    
+result
 
 list=[n*2 for n in numbers if n%2==1]
 print(list)
-    
-#6 
+
+#6
 sens="Life is too short, you need python"
 aeiou=["a","e","i","o","u"]
 
@@ -906,11 +906,11 @@ aeiou=["a","e","i","o","u"]
 #아규먼트: 함수를 호출할 때 전달되는 입력값
 
 def sum(a,b): #a,b는 파라메타(매개변수)
-    return a+b 
+    return a+b
 
 print(sum(3,4)) #3,4는 인수(아규먼트)
 
-def say(): 
+def say():
     return 'Hi'
 
 
@@ -946,7 +946,7 @@ sumMul("mul",1,5,8)
 def func(**kwargs):
     print(kwargs) #함수형태
                   # key=value형태의 입력인수가 저장되는 딕셔너리 변수
-                  
+
 
 func(a=1) # a=1의 딕셔너리 생성
 func(name='foo',age='3')
@@ -1000,13 +1000,120 @@ a=1
 def vartest():
     global a #함수는 독립적이용이 좋기때문에 되도록 안쓰는게 좋음
     a=a+1
-    
+
 vartest()
 print(a)
 
-#lambda
+#lambda : 함수를 간결하게 만들때
+sum=lambda a,b : a+b
+sum(3,4)
+
+def sum(a,b):
+    return a+b #와 동일한 기능
+
+#lambda사용하면 def안쓰이는 데에서 함수 사용가능
+myList=[lambda a,b:a+b, lambda a,b:a*b]
+myList[0](3,4)
+myList[1](3,4) 
+#어떻게 한번에 받아올까?
+newList=[myList[0](3,4),myList[1](3,4)]
+newList
+myList[0][1](3,4)
+
+#연습문제
+#1 홀짝판별
+def is_odd(num):
+    if num%2==0:
+        return False
+    else:
+        return True
+is_odd(3)
+is_odd(8)
+
+#2 평균값 계산
+def calMean(*num):
+    result=0
+    for i in num:
+        result+=i
+    return result/len(num)
+        
+calMean(3,4,9)
+
+#3 구구단 출력
+def gugudan(n):    
+    print("****%d단****" % n)
+    for i in range(1,10):
+        print("{0} * ".format(n),i," =", n*i)
+       
+gugudan(3)
+    
+#4 피보나치
+def fibo(n):
+    if n==0 or n==1:
+        return n
+    else:
+        return fibo(n-2)+fibo(n-1)
+fibo(1)
+fibo(6)
+
+for i in range(10):
+    print(fibo(i))
+    
+ #5 5보다 큰수만
+def myfunc(nums):
+    result=[]
+    for num in nums:
+        if num>5:
+            result.append(num)
+    return result
+    
+myfunc([2,3,5,6,3,49])
+
+myfunc=lambda nums:[num for num in nums if num>5]
+    
+    
+    
+### 04-2. 사용자 입출력 관리    
+#사용자입력 : input
+a=input()
+a
+
+number=input('숫자를 입력하세요:')
+print(number)
+    
+#print 자세히 알기
+#1. ""로 둘러싸인 문자열은 +연산과 동일하다
+print("life" "is" "too" "short")
+print("life"+"is"+"too short")
+
+#2. 문자열 띄어쓰기는 콤마로 한다.
+print("life","is","too short")
+    
+#3. 한 줄에 결과 값 출력하기
+for i in range(10):
+    print(i, end=" ")
+    
+#연습문제
+#1. 두 수의 합
+input1=input("첫번째 숫자를 입력하세요:")
+input2=input("두번째 숫자를 입력하세요:")
+total=int(input1)+int(input2)
+print("두수의 합은 %s입니다" % total)    
+    
+#2. 숫자의 총합
+a=input()   
+aList=list(a.split(","))
+result=0
+for i in aList:
+    result+=int(i)
+    
+result
+
+#4. 한줄 구구단
+gugu=input("구구단을 출력할 숫자를 입력하세요(2~9)")
+for i in range(1,10):
+    print(int(gugu)*i, end=" ")
 
 
 
-
-
+###04-3. 파일 읽고 쓰기
