@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Feb 20 23:39:51 2018
-
 @author: Yeoyong Na
 """
 
@@ -1074,7 +1073,7 @@ myfunc=lambda nums:[num for num in nums if num>5]
     
     
 ### 04-2. 사용자 입출력 관리    
-#사용자입력 : input
+#사용자입력 : input 
 a=input()
 a
 
