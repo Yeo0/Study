@@ -1115,4 +1115,153 @@ for i in range(1,10):
 
 
 
-###04-3. 파일 읽고 쓰기
+### 04-3. 파일 읽고 쓰기
+
+
+## 파일 생성하기
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'w') #r:read, w:write, a:add
+f.close() 
+    
+## 파일을 쓰기모드로 열어 출력값 적기
+
+# writedata.py
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'w') #r:read, w:write, a:add
+for i in range(1,11):
+    data="%d번째 줄입니다.\n" % i
+    f.write(data)
+f.close()
+
+## 프로그램의 외부에 저장된 파일을 읽는 여러가지 방법
+
+#readline()
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'r') #r:read, w:write, a:add
+line=f.readline()
+print(line) 
+f.close()    
+
+while True:
+    data=input()
+    if not data: break
+    print(data)
+
+#readlines()
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'r') #r:read, w:write, a:add
+lines=f.readlines() #각각의 줄을 요소로 갖는 리스트로 리턴
+for line in lines:
+    print(line)
+f.close()
+    
+
+#read()
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'r') #r:read, w:write, a:add
+data=f.read() #파일 내용 전체 문자열 리턴
+print(data)
+f.close()
+
+## 파일에 새로운 내용 추가하기
+
+# adddata.py
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'a') #r:read, w:write, a:add
+for i in range(11,20):
+    data="%d번째 줄입니다.\n" % i
+    f.write(data)
+f.close()
+    
+##with문과 함께 사용하기
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/foo.txt", 'w') #r:read, w:write, a:add
+f.write("Life is too short, you need python")
+f.close()
+
+with open("/Users/yeoyoung/documents/GitHub/Study/jump2python/new.txt", 'w') as f: 
+    f.write("Life is too short, you need python")
+#with 사용하면 f 자동으로 close
+
+#sys모듈로 입력 인수 주기
+#sys1.py
+    
+import sys
+
+args=sys.argv[1:]
+for i in args:
+    print(i)
+   
+#sys2.py
+import sys
+args=sys.argv[1:]
+for i in args:
+    print(i.upper(), end='')
+    
+    
+    
+#연습문제
+#1.
+f1=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/test.txt", 'w')
+f1.write("Life is too short")
+f1.close()
+
+f2=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/test.txt", 'r')
+print(f2.read())
+
+#2.
+data=input("저장할 내용을 입력하세요:")
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/test.txt", 'a')
+f.write(data)
+f.close()
+
+##3.
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/abc.txt", 'r')
+data=f.readlines()
+f.close()
+
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/abc.txt", 'w')
+newdata=reversed(data)
+for new in newdata:
+    new =new.strip()
+    f.write(new)
+    f.write('\n')
+#newdata=newdata.replace("\n","")
+#
+#f.write(newdata)
+
+f.close()
+
+
+#4.
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/test.txt", 'r')
+data=f.read()
+f.close()
+data=data.replace("java","python")
+
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/test.txt", 'w')
+f.write(data)
+f.close()
+
+#5.
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/sample.txt", 'r')
+data=f.readlines()
+f.close()
+#int(data[1])
+total=0
+for dat in data:
+    result=int(dat)
+    total+=result
+avg=total/len(data)
+
+f=open("/Users/yeoyoung/documents/GitHub/Study/jump2python/sample.txt", 'w')
+f.write(str(avg)) # write에는 문자만 사용가능
+f.close() 
+    
+
+
+####05-1. 클래스
+
+
+
+
+
+
+
+
+
+
+
