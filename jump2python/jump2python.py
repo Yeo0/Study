@@ -1254,6 +1254,328 @@ f.close()
 
 
 ####05-1. 클래스
+#클래스 : 같은 기능을 쓰는 함수를 동시에 이용할 때 서로 독립된 값을 쓰기 위해 
+#      : 과자틀 -클래스 / 과자틀로 찍어낸 과자들 - 객체(object)
+#클래스에 의해 만들어진 객체들은 객체별로 독립적인 성격을 가짐.
+
+class Calculator:
+    def __init__(self): #받아오는 역할
+        self.result=0 
+        
+    def add(self, num):
+        self.result+=num
+        return self.result
+    
+    def sub(self, num):
+        self.result-=num
+        return self.result
+    
+cal1=Calculator()
+cal2=Calculator()
+
+print(cal1.add(3))
+print(cal1.add(4))
+print(cal2.add(3))        
+print(cal2.add(7)) 
+
+
+#클래스 쉬운 예제
+class Cookie:
+    pass #임시 코드 작성할 때 주로 pass사용
+
+a=Cookie() # a=객체 / a는 cookie의 인스턴스
+b=Cookie() #한개의 클래스는 무수히 많은 객체를 만들 수 있음
+
+#인스턴스: 특정 객체가 어떤 클래스의 객체인지 설명할 때
+#클래스 만들때는 일단 구조 (결과값이 어떻게 나올것인지를)를 생각하고 만드는 게 좋음
+
+class FourCal():
+    pass
+
+a=FourCal()
+type(a)
+
+#클래스 내의 함수는 메소드(Method)
+class FourCal():
+    def setdata(self, first, second): #클래스 내의 함수에서 받아올 인수들을 지정할 때 self이용
+        self.first=first #a.first의 의미
+        self.second=second #a.second의 의미
+
+
+a.setdata(4,2) #setdata함수의 self = a, first =4, second = 2
+ 
+print(a.first)
+print(a.second)
+
+#새로운 메소드 추가
+class FourCal():
+    def setdata(self, first, second): #클래스 내의 함수에서 받아올 인수들을 지정할 때 self이용
+        self.first=first #a.first의 의미
+        self.second=second #a.second의 의미
+    
+    def sum(self):
+        result=self.first+self.second
+        return result
+    
+    def mul(self):
+        result=self.first*self.second
+        return result
+    
+    def sub(self):
+        result=self.first-self.second
+        return result
+    
+    def div(self):
+        result=int(self.first / self.second)
+        return result
+        
+a=FourCal()
+b=FourCal()
+
+a.setdata(4,2)     
+b.setdata(3,7)
+        
+a.sum()
+a.mul()        
+a.div()        
+b.sum()   
+b.sub()     
+b.div()        
+        
+        
+##생성자(Constructor) : __init__ : 객체가 생성될 떼 자동으로 호출되는 메소드
+class FourCal():
+    def __init__(self, first, second): #self:생성되는 객체, first:4, second:2
+        self.first=first
+        self.second=second
+         
+    def sum(self):
+        result=self.first+self.second
+        return result
+    
+    def mul(self):
+        result=self.first*self.second
+        return result
+    
+    def sub(self):
+        result=self.first-self.second
+        return result
+    
+    def div(self):
+        result=int(self.first / self.second)
+        return result
+     
+
+a=FourCal(4,2) #처음부터 값을 전달해줘야함
+a.sum()
+a.div()        
+
+## 클래스의 상속 : 어떤 클래스를 만들 때 다른 클래스의 기능을 물려받게 끔 하는 것
+#             : 기존클래스는 그대로 두고 클래스 기능 확장시킬 때 사용.
+
+class MoreFourCal(FourCal): #인수에 다른 클래스를 받아옴
+    pass
+
+a=MoreFourCal(4,2) 
+a.sum() #앞에 만들어 놓은 함수의 기능을 똑같이 사용 가능
+
+
+#제곱승
+class MoreFourCal(FourCal): #인수에 다른 클래스를 받아옴
+    def pow(self):
+        result=self.first**self.second
+        return result   
+    
+a.pow()
+
+##Method Overwriting -> 같은 함수를 다시 만들면 이렇게 오버라이팅 된 메소드가 호출됨
+
+class SafeFourCal(FourCal):
+    def div(self):
+        if self.second==0:
+            print("Can't Calculate")
+        else:
+            return self.first/self.second
+    
+    
+a=SafeFourCal(4,0)
+a.div()
+
+
+##클래스 변수 : 클래스 내에서 선언된 변수
+class Family:
+    lastname="김"
+
+print(Family.lastname) #함수사용하듯 사용할 수 있음
+a=Family()
+b=Family()
+print(a.lastname)
+print(b.lastname)
+
+Family.lastname="박"
+print(a.lastname)
+print(a.lastname) #클래스 변수는 생성된 모든 객체에 공유됨
+
+id(Family.lastname) #객체 주소 리턴
+id(a.lastname)
+id(b.lastname)
+
+
+
+##클래스의 활용
+#나이출력
+def print_age(data):
+    tmp=data.split("|")
+    age=tmp[1]
+    print(age)
+    
+data="홍길동|42|A"
+print_age(data)
+
+def print_grade(data):
+    tmp=data.split("|")
+    name=tmp[0]
+    grade=tmp[2]
+    print("%s 당신의 점수는 %s입니다." % (name, grade))
+
+data="홍길동|42|A"
+print_grade(data)
+
+class Data:
+    def __init__(self, data):
+        tmp=data.split("|")
+        self.name=tmp[0]
+        self.age=tmp[1]
+        self.grade=tmp[2]
+
+
+data=Data("홍길동|42|A")
+print(data.age)
+print(data.name)
+print(data.grade)
+
+
+
+class Data:
+    def __init__(self, data):
+        tmp=data.split("|")
+        self.name=tmp[0]
+        self.age=tmp[1]
+        self.grade=tmp[2]
+    
+    def print_age(self):
+        print(self.age)
+    def print_grade(self):
+        print("%s님 당신의 점수느 %s입니다." % (self.name, self.grade))
+        
+
+data=Data("홍길동|42|A")
+data.print_age()
+data.print_grade()
+
+####연습문제
+#1. 
+class Calculator:
+    def __init__(self):
+        self.value=0
+        
+    def add(self,val):
+        self.value+=val
+        
+cal=Calculator()
+cal.add(3)
+cal.add(4)
+
+print(cal.value)
+
+#2.
+class Calculator:
+    def __init__(self, init_value):
+        self.value=init_value
+        
+        
+    def add(self, val):
+        self.value+=val
+
+       
+cal=Calculator(0)
+cal.add(3)
+cal.add(4)
+
+print(cal.value)
+
+
+#3.
+class Calculator:
+    def __init__(self):
+        self.value=0
+        
+    def add(self,val):
+        self.value+=val
+        
+class UpgradeCalculator(Calculator):
+    def minus (self, val):
+        self.value-=val
+
+cal=UpgradeCalculator()
+cal.add(10)
+cal.minus(7)
+print(cal.value)    
+    
+#4.MaxLimitCalculator
+
+class MaxLimitCalculator(Calculator):
+    def add(self,val):
+        self.value+=val
+        
+        if self.value >= 100:
+            self.value=100
+        
+
+cal=MaxLimitCalculator()
+cal.add(50)
+cal.add(60)
+print(cal.value)
+
+
+#5.
+class Calculator():
+    def __init__(self, list):
+        self.list = list
+    
+    def sum(self):
+        return sum(self.list)    
+    def avg(self):
+        return sum(self.list)/len(self.list)
+        
+cal1=Calculator([1,2,3,4,5])
+print(cal1.sum())
+print(cal1.avg())
+cal2=Calculator([6,7,8,9,10])
+print(cal2.sum())
+print(cal2.avg())
+
+#풀이
+class Calculator():
+    def __init__(self, list):
+        self.list=list
+        
+    def sum(self):
+        result=0
+        for num in self.list:
+            result+=num
+        return result
+    
+    def avg(self):
+        total=self.sum()
+        return total/len(self.list)
+
+cal1=Calculator([1,2,3,4,5])
+print(cal1.sum())
+print(cal1.avg())
+cal2=Calculator([6,7,8,9,10])
+print(cal2.sum())
+print(cal2.avg())
 
 
 
@@ -1265,3 +1587,8 @@ f.close()
 
 
 
+
+
+
+    
+    
