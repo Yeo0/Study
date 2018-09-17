@@ -1579,6 +1579,42 @@ print(cal2.avg())
 
 
 
+##### 05-2. 모듈
+#모듈 : 함수나 변수. 클래스 들을 모아 농흔 파일
+#    : 다른 파이썬 프로그램에서 불러와 사용할 수 있게 끔 만들어진 파이썬 파일
+# import!!!
+
+import mod1 #현재 디렉토리에 있는 파일이나 파이썬 랑비브러리가 저장된 디렉터리에 있는 모듈만 ㅁ불러올 수 있다.
+
+print(mod1.sum(3,4))
+
+
+#모듈 함수를 사용하는 또 다른방법
+#from 모듈이름 import 함수
+
+from mod1 import * (모든 함수다)
+i
+
+#모듈에 포함된 변수, 클래스, 함수 사용하기
+print(mod2.PI)
+a=mod2.Math()
+print(a.solv(2))
+
+#새 파일 안에서 이전에 만든 모듈 불러오기
+
+#모듈을 불러오는 또 다른 방법
+#1.sys.path.append(모듈을 지정한 디렉토리)사용
+import sys
+sys.path # 파이썬 라이브러리들이 설치되어있는 디렉토리 보여줌
+sys.path.append("/Users/yeoyoung/Desktop/python")
+sys.path # 이후 모듈 바로 import 가능
+
+#2. pythonpath 환경변수 사용하기
+
+
+##연습문제
+#1.
+#
 
 
 
@@ -1590,5 +1626,18 @@ print(cal2.avg())
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
