@@ -5,7 +5,8 @@
 - Python
 - Optimization ( Linear Programming / Constraints Optimization)
 
-### ADSP
+### ADsP
+- 2017.06.27 합격
 
 
 ### Boaz
