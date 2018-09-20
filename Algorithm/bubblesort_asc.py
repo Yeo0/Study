@@ -24,7 +24,7 @@ import numpy as np
 # # print(A)
 
 
-def Bubblesort(x):
+def Bubblesort_asc(x):
 	for start in range(len(x)):
 		for i in range(1,len(x)-start):
 			if x[i-1]>x[i]:
@@ -37,5 +37,5 @@ def Bubblesort(x):
 A=np.arange(1,1001)
 np.random.shuffle(A)
 
-print(Bubblesort(A))
+print(Bubblesort_asc(A))
 
