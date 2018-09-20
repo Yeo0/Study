@@ -5,16 +5,24 @@
 - Python
 - Optimization ( Linear Programming / Constraints Optimization)
 
-### ADSP
+### ADsP
+- 2017.06.27 합격
 
 
 ### Boaz
+- 2016.07~2017.07 활동
+
+
+
+### R_Tesnorflow
+- Kaggle
+
 
 
 ### Jump to Python 
 - 야매로 공부한 것 복습용.
 
 
-### R_Tesnorflow
-- Kaggle
 
+### Web Crawling
+- 파이썬을 이용한 머신러닝, 딥러닝 실전 개발 입문 _ 0. 머신러닝을 위한 데이터 처리
