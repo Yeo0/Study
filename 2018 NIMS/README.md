@@ -1,5 +1,7 @@
 # 2018_NIMS
 
+산업수학 후속세대 양성 프로그램
+
 <br/>
 
 #### Data science based on Matrix
