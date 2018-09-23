@@ -1,27 +1,13 @@
-# import random
+N=int(input("배열 크기를 입력하세요: "))
 
-# A=[i for i in range(1,1001)]
-# #B=list(range(1,1001))
+inputlist=[]
 
-# #A=random.shuffle(A)
-# print(B)
+for i in range(N):
+	element = input("배열의 원소를 입력해 주세요: ")
+	inputlist.append(element)
 
 
-
-#Bubble sort
-import numpy as np
-
-# A=np.arange(1,1001)
-# np.random.shuffle(A)
-# # print(A) # input A
-# # print(len(A))
-# # for start in range(len(A)):
-# # 	for i in range(1,len(A)-start):
-# # 		if A[i-1]>A[i]:
-# # 			temp=A[i-1]
-# # 			A[i-1]=A[i]
-# # 			A[i]=temp
-# # print(A)
+print(inputlist)
 
 
 def Bubblesort_asc(x):
@@ -33,9 +19,5 @@ def Bubblesort_asc(x):
 				x[i]=temp
 	return x
 
-
-A=np.arange(1,1001)
-np.random.shuffle(A)
-
-print(Bubblesort_asc(A))
+print(Bubblesort_asc(inputlist))
 

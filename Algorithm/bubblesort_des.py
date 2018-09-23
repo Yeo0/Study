@@ -1,7 +1,16 @@
-import numpy as np
+N=int(input("배열 크기를 입력하세요: "))
+
+inputlist=[]
+
+for i in range(N):
+	element = input("배열의 원소를 입력해 주세요: ")
+	inputlist.append(element)
 
 
-def Bubblesort_des(x):
+print(inputlist)
+
+
+def Bubblesort_asc(x):
 	for start in range(len(x)):
 		for i in range(1,len(x)-start):
 			if x[i-1]<x[i]:
@@ -10,9 +19,4 @@ def Bubblesort_des(x):
 				x[i]=temp
 	return x
 
-
-
-A=np.arange(1,1001)
-np.random.shuffle(A)
-
-print(Bubblesort_des(A))
+print(Bubblesort_asc(inputlist))
