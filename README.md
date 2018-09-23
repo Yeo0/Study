@@ -1,5 +1,5 @@
 # Study
-#### ***[Gitblog](https://yeo0.github.io/)***
+### ***[Gitblog](https://yeo0.github.io/)***
 
 <br/>
 
@@ -44,11 +44,14 @@
 
 
 ### Jump to Python 
-- 야매로 공부한 것 복습용.
+- 복습
+- [Gitblog](https://yeo0.github.io/tag/pg-python/) 업로드
 
-
+<br/>
 
 ### Web Crawling
 - 파이썬을 이용한 머신러닝, 딥러닝 실전 개발 입문 
   - 0. 머신러닝을 위한 데이터 처리
   - 1. 크롤링과 스크레이핑
+
+- [Gitblog](https://yeo0.github.io/tag/study-crawling/) 업로드
