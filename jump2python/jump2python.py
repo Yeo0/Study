@@ -1617,12 +1617,44 @@ sys.path # 이후 모듈 바로 import 가능
 #패키지 : 도트(.)를 이용하여 파이썬 모듈을 계층적(디렉터리 구조) / 디렉터리와 파이썬 모듈로 구성
 #모델명이 A.B라면 A:패키지명 , B:모듈
 
+##패키지안의 함수 실행
+#set PYTHONPATH=/Users/yeoyoung/Desktop/python
+
+#모듈이 포함되게 임포트 해야함
+#1.
+import game.sound.echo #제일 마지막은 패키지만 올 수 있음
+game.sound.echo.echo_test
+
+#2. #내가 제일 일반적으로 사용하는 방법
+from game.sound import echo
+echo.echo_test()
+
+from game.sound.echo import echo_test
+echo_test()
+
+
+##__init__.py용도
+# 있어야 패키지로 인식 (python 2.x버전)
 
 
 
+##__all__의 용도
+#__init__.py파일에 __all__이라는 변수를 설정하고 import 할 수 있는 모듈을 정의해 주어야함
+#from a.b.c import * 에서 c가 모듈이면 상관없지만 그렇지 않은경우 이 과정이 필요함
 
 
 
+##relative 패키지
+#relative 접근자
+
+# .. : 부모 디렉토리
+#. : 현재 디렉토리 
+
+#모듈 안에서만 사용 가능
+
+
+
+#### 05-4. 예외처리
 
 
 
