@@ -32,6 +32,8 @@ Created on Sat Sep 22 16:46:16 2018
 # [1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.
 
 
+################################
+
 # 세가지 과정을 통해 자르고 정렬하고 하라는거 뽑으면됨
 # 1) array=[]
 # 2) command 는 [i,j,k]모음
@@ -62,3 +64,16 @@ solution([1,5,2,6,3,7,4],[[2,5,3],[4,4,1],[1,7,3]])
 # list[0][0:2]
 # print(list[0][0])
 # print(len(list))
+
+##최적 솔루션
+#파이썬에선 for 문에 한번에 여러개 변수 돌릴 수 있음
+def solution(array, commands):
+	answer=[]
+
+	for i, j, k in commands:
+		answer.append(sorted(array[i-1:j])[k-1])
+		
+	return answer
+
+
+
