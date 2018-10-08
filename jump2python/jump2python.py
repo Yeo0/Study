@@ -1655,14 +1655,163 @@ echo_test()
 
 
 #### 05-4. 예외처리
+#try, except : try블록 실행중에 오류가 발생하면 except블록이 수행/try블록에서 오류가 발생하지 않는다면 except 블록은 수행되지 않음
+#1. 그냥 try, except만 쓰면 오류가 발생하기만 하면 except 블록 수행
+try:
+
+except:
+
+#2. 발생오류만 포함 _미리 정해놓은 오류 이름과 일치할 때만 except블록 수행
+try:
+    
+except 발생 오류:
+
+#3. 발생 오류와 오류 메시지 변수까지 포함_ 오류 메시지 내용까지 알고싶을 때
+try:
+
+except 발생 오류 as 오류 메시지 변수
 
 
+# try문은 else절을 지원. else절은 예외가 발생하지 않은 경우 실행. 반드시 except절 바로 뒤에 위치
+try:
+    f=open('foo.txt','r')
+except FileNotFoundError as e:
+    print(str(e))
+else:
+    data=f.read()
+    f.close()
+#에러가 발생하지 않으면 이어서 실행되는 것
 
+#try.. finally 
+#finally- try문 수행 도중 예외 발생 여부에 상관없이 항상 수행됨
+#리소스를 close해야 할 경우 많이 사용
+    
+f=open('foo.txt','w')
+try:
+    #무언가 수행
+finally:
+    f.close()
 
+#여러개의 오류처리하기
+try:
+except 발생오류1:
+except 발생오류2:
+    
+#
+try:
+    a=[1,2]
+    print(a[3])
+    4/0
+except ZeroDivisionError as e:
+    print(e)
+    
+except IndexError as e:
+    print(e)
+#
+try:
+    a=[1,2]
+    print(a[3])
+    4/0
+except (ZeroDivisionError, IndexError) as e:
+    print(e)
 
+##오류 회피하기-pass
+try:
+    f=open('없는파일','r')
+except FillNotFoundError:
+    pass
 
+##오류 일부러 발생시키기
+#raise
 
+class Bird:
+    def fly(self):
+        raise NotImplementedError
+#Bird클래스를 상속받는 자식 클래스는 반드시 fly함수를 구현해야 한다. 
+#만약 자식클래스가 fly함수를 구현하지 않은 상태로 fly함수를 호출하면 어떻게 될까
+        
+class Eagle(Bird):
+    pass
 
+eagle=Eagle()
+eagle.fly()
+
+class Eagle(Bird):
+    def fly(self):
+        print("very fast")    
+
+eagle=Eagle()
+eagle.fly()
+#새로 구현해야 오류 생기지 않음
+    
+## 예외만들기 _특수 경우에만 예외처리를 하기위해 종종 예외를 만들어 사용함
+#python내장 클래스인 Exception을 상속하여 만듦
+class MyError(Exception): 
+    pass
+
+def say_nick(nick):
+    if nick=='바보':
+        raise MyError()
+    print(nick)
+
+try:    
+    say_nick("천사")
+    say_nick("바보")
+except MyError:
+    print("허용되지 않는 별명입니다.")    
+    
+ 
+try:    
+    say_nick("천사")
+    say_nick("바보")
+except MyError as e:
+    print(e)
+#위의 경우에 오류메시지가 출력되지 않음. 출력하고 싶다면 __str__메소드 구현해야함.
+
+class MyError(Exception):
+    def __str__(self):
+        return "허용되지 않는 별명입니다"
+
+#따라서 종합해보면 (에러 발생시점에 오류메시지를 출력하고 싶으면)
+class MyError(Exception):
+    def __init__(self, msg):
+        self.msg=msg
+        
+    def __str__(self):
+        return self.msg
+    
+    
+def say_nick(nick):
+    if nick=="바보":
+        raise MyError("허용되지 않는 별명입니다.")
+    print(nick)
+    
+try:
+    say_nick("천사")
+    say_nick("바보")
+except MyError as e:
+    print(e)
+    
+##연습문제
+#1.
+"a"+str(1)   
+    
+    
+a=[1,2,3]
+a[-3] #뒤에서 세번째 요소값
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
