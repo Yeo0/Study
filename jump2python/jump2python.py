@@ -235,7 +235,7 @@ a.append([5,6]) #리스트 안에는 어떤 자료형도 추가될 수 있음
 a
 
 a=[1,2,3,4,3,2]
-a.sort() # 정렬함수. 알파벳도 가능
+a.sort() # 정렬함수. 알파벳도 가능 /아예 바꿔버림
 a
 
 a=['a','c','b']
@@ -1801,21 +1801,211 @@ a=[1,2,3]
 a[-3] #뒤에서 세번째 요소값
     
     
+#### 05-5. 내장함수
+#abs:절댓값
+abs(3)
+abs(-3)
     
+#all:모두 참이면 True, 거짓이 하나라도 있으면 False
+all([1,2,3])    
+all([1,2,3,0])    
+
+#any: 하나라도 참이 있으면 True, 모두 거짓이면 False 
+any([1,2,3,0])
+any([0,""]) 
+
+#chr : 아스키 코드값을 입력으로 받아 그 코드에 해당하는 문자를 출력
+chr(97)    
+chr(48)    
+
+#dir:객체가 자체적으로 가지고있는 변수나 함수를 보여줌.
+dir([1,2,3])    
+dir({'1':'a'})
+
+#divmod(a,b): a를 b로 나눈 몫과 나머지를 튜플 형태로 리턴
+divmod(7,3)
+divmod(1.3,0.2)   
+
+#enumerate:순서가 있는 자료형(리스트, 튜플, 문자열)을 입력으로 받아 인덱스 값을 포함하는 enumerate객체 리턴
+#for문과 함께 자주 사용됨    
+
+for i, name in enumerate(['body','foo','bar']):
+    print(i,name)
+#자료형의 현제 순서=index와 거기에 해당하는 값을 알 수 있음
+#객체가 어느 위치에 있는지 알려주는 인덱스 값이 필요할때 유용
     
+#eval :실행 가능한 문자열을 입력으로 받아 문자열을 실행한 결과값을 리턴하는 함수
+#보통 입력ㅂ받은 문자열로 파이썬의 함수느 클래스를 동적으로 실행하고 싶은 경우에 사용
+eval("1+2")    
+eval("'hi'+'a'")
+eval('divmod(4,3)') 
+
+#filter(함수이름, 그 함수에 차례로 들어갈 반복 가능한 자료형) - 두번째 인수의 요소들이 첫번째 인수인 함수에 입력됐을때 리턴값이 참인 것만 묶어서 돌려줌.
+def positive(l):
+    result=[]
+    for i in l:
+        if i>0:
+            result.append(i)
+    return result
+
+print(positive([1,-3,2,0,-5,6]))
+
+#=
+def positive(x):
+    return x>0
+
+print(list(filter(positive,[1,-3,2,0,-5,6])))    
+print(list(map(positive,[1,-3,2,0,-5,6] )))
     
+list(filter(lambda x:x>0, [1,-3,2,0,-5,6]))  
+
+#hex : 16진수 변환/리턴  
+hex(234)
+hex(3)    
     
-    
-    
-    
-    
-    
-    
-    
+#id : 객체를 입력받아 객체의 고유 주소값(레퍼런스)를 리턴하는 함수
+a=3
+id(3)  
+id(a)    
+b=a
+id(b) # 3,a,b가 같은 객체 가리키고 있음
+id(4)
+
+#input : 사용자 입력 받는 함수 
+a=input()    
+a    
+b = input("Enter :")    
+b
+
+
+#int : 문자열 형태의 숫자 / 소숫점 숫자를 정수 형태로 리턴
+int('3')
+int(3.4)
+int('11',2) #이진수
+hex(26)
+int('1A',16) #16진수
+
+
+#isinstance :isinstance(object, class) : 인스턴스,클래스 
+#입력받은 인스턴스가 그 클래스의 인스턴스인지 판단하고 참이면 True, 거짓이면 False를 리턴
+
+class Person: pass
+
+a = Person()
+isinstance(a, Person) #a가 Person 클래스에 ㅡ이해서 생성된 인스턴스임을 확인
+
+b = 3
+isinstance(b, Person)
+
+
+#len : len(s) 는 s의 길이(요소의 전체 개수)를 리턴하는 함수
+len("python")
+len([1,2,3])
+len((1,'a'))
+
+
+#list : list(s)는 반복가능한 자료형 s를 입력받아 리스트로 만들어 리턴
+list("python")
+list((1,2,3))
+
+a = [1,2,3]
+b = list(a)
+b
+
+#map :map(f,iterable): 함수 f와 반복가능한 자료형을 입력으로 받음
+#입력받은 자료형의 각 요소가 함수 f에 의해 수행된 결과를 묶어서 리턴하는 함수
+
+def two_times(numberList):
+    result = []
+    for number in numberList:
+        result.append(number*2)
+    return result
+
+result = two_times([1,2,3,4])
+print(result)
+
+def two_times(x):
+    return x*2
+
+list(map(two_times, [1,2,3,4]))
+
+#max : max(iterable) - 최대값을 리턴하는 함수
+max([1,2,3])
+max("python")
+
+#min : min(iterable) - 최솟값을 리턴
+min([1,2,3])
+min("python")
+
+#oct(x) : 정수 형태를 8진수 문자열로 바꾸어 리턴
+oct(34)
+oct(12345)
+
+#open(filename, 읽기방법) - 파일 객체를 리턴. 기본값이 읽기전용모드로 리턴
+#w: 쓰기모드 / r: 읽기모
+   
+f = open("binarly_file","rb")
+fred = open("read_mode.txt", 'r')
+fred2 = open("read_mode.txt")
+fappend = open("append_mode.txt",'a')
+
+#ord : 문자의 아스키 코드 반환
+ord('a')
+ord('0') 
+
+#pow(a,b) = a**b와 동일
+pow(2,4)
+pow(3,3)
+
+#range(start,stop,step) - 범위의 값 생성
+list(range(5))
+list(range(5,10))
+
+list(range(1,10,2))
+list(range(0,-10,-1))
+
+#round(number, 자리수) - 반올림
+round(4.6)
+round(4.2)
+round(5.6784, 3)
+
+#sorted(iterable) - 정렬한 후 그 결과를 리스트로 리턴 (원래 리스트를 바꾸진 않음
+sorted([3,1,2])
+sorted(['a','c','b'])
+sorted("zero")
+sorted((3,2,1))
+
+#str(object) - 문자열 형태로 객체를 변환
+str(3)
+str('hi')
+str('hi'.upper())
+
+#sum(iterable) - 리스트나 튜플의 모든 요소의 합을 ㅌ리
+sum([1,2,3])
+sum((4,5,6))
+
+#tuple(iterable) - 반복 가능한 자료형을 입력받아 튜플 형태로 바꾸어 리턴
+tuple('abc')
+tuple([1,2,3])
+tuple((1,2,3))
+
+
+#type(object) - 입력값의 자료형이 뭔지 알려줌
+type("abc")
+type([])
+type(open("test",'w'))
+
+#zip(iterable 여러개도 가능)- 동일한 개수로 이루어진 자료형 가능
+list(zip([1,2,3],[4,5,6]))
+list(zip([1,3,5],[3,5,7],[9,11,13]))
+list(zip("abc","def"))
+
+
+#문제1_내장함수
 
 
 
 
 
 
-    
+
